@@ -34,10 +34,8 @@
         state = $el.attr("data-state");
     if (state == "off") {
       updateNote(row, col, true);
-      socket_handler.sendMessage("update", [row, col, true]);
     } else if (state == "on") {
       updateNote(row, col, false);
-      socket_handler.sendMessage("update", [row, col, false]);
     } else console.log("fail");
   }
 
@@ -191,27 +189,9 @@
   window.start = start;
   window.stop = stop;
 
-  // WebSockets.
-  window.socket_handler = {
-    socket: null,
-    start: function () {
-      var url = "ws://" + location.host + "/socket";
-      socket_handler.socket = new WebSocket(url);
-      socket_handler.socket.onmessage = socket_handler.showMessage;
-    },
-    showMessage: function (e) {
-      var msg = JSON.parse(e.data);
-      if (msg.t === "update") updateNote(msg.b[0], msg.b[1], msg.b[2]);
-    },
-    sendMessage: function (type, message) {
-      socket_handler.socket.send(JSON.stringify({"t": type, "b": message}));
-    }
-  };
-
   // Expose the setup function to the common namespace.
   window.setupBeat = function () {
     setupAudio();
-    socket_handler.start();
     setupUI("#grid");
   };
 
