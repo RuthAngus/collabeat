@@ -18,7 +18,7 @@
   // UI functions.
   var grid_pars = {
     "ncells": 16,
-    "nvoices": 4,
+    "nvoices": 5,
     "cell_width": 20,
     "cell_height": 50
   };
@@ -133,7 +133,8 @@
         "samples/beep-mid.wav",
         "samples/hat.wav",
         "samples/snare.wav",
-        "samples/kick.wav"
+        "samples/kick.wav",
+        "samples/lc2.wav"
       ],
       buffers = new Array(buffer_urls.length),
       context,
